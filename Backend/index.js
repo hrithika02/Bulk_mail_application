@@ -1,12 +1,8 @@
-// index.js
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 
-// --------------------
-// MongoDB Connection
-// --------------------
 mongoose
   .connect(
     "mongodb+srv://hrithikasridhar2_db_user:mypassword123@cluster0.svnubsa.mongodb.net/passkey?retryWrites=true&w=majority&appName=Cluster0"
@@ -14,18 +10,13 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ Failed to connect to MongoDB", err));
 
-// --------------------
-// Express App Setup
-// --------------------
+
 const app = express();
 const port = 5000;
 
 app.use(cors());
 app.use(express.json());
 
-// --------------------
-// Mongoose Model
-// --------------------
 const Credential = mongoose.model(
   "credential",
   new mongoose.Schema({
@@ -35,9 +26,6 @@ const Credential = mongoose.model(
   "bulkmail"
 );
 
-// --------------------
-// POST /sendMail
-// --------------------
 app.post("/sendMail", async (req, res) => {
   const { msg, subject, emailList } = req.body;
 
@@ -113,9 +101,6 @@ app.post("/sendMail", async (req, res) => {
   }
 });
 
-// --------------------
-// Start Server
-// --------------------
 app.listen(port, () => {
   console.log(`🚀 Server started on port ${port}`);
 });

@@ -33,7 +33,7 @@ function App() {
 
     setStatus(true);
     try {
-      const res = await axios.post("http://localhost:5000/sendMail", {
+      const res = await axios.post("https://bulk-mail-application-2.onrender.com", {
         msg,
         subject,
         emailList,
